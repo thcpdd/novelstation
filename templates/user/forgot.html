@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}小说驿站-找回密码{% endblock title %}
+
+{% block static_file %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/login.js' %}"></script>
+{% endblock static_file %}
+
+{% block head_file %}
+    <style>
+        .submit{ margin-left:84px;}
+    </style>
+{% endblock head_file %}
+{% block navigation %}{% endblock navigation %}
+
+{% block body %}
+    <div class="box">
+    <h3>小说驿站-找回密码</h3>
+           <div class="menu_3">
+               <form id="user_name" method="post" action="{% url 'user:forgot' %}">
+                   {% csrf_token %}
+                   <p><span> &nbsp;用 户 名：</span> <input type="text" name="username" value="" class="text_1" autocomplete="off" required></p>
+                   <p><span>注册邮箱：</span> <input type="text" name="email"  class="text_2"   autocomplete="off" required></p>
+                   <span class="errmsg" style="color: red">{{ errmsg }}</span>
+                   <p><input type="submit"  value="发送验证码"  class="submit" style="width:auto; padding:0px 10px"></p>
+               </form>
+           </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,95 @@
+{% extends 'user/userinfo.html' %}
+
+{% block head_file %}{% endblock head_file %}
+
+{% block userinfo %}{% endblock userinfo %}
+
+{% block userinfo_list %}
+    <ul class="list_1">
+        <li><a href="{% url 'user:user' 'info' %}"><span class="icon"></span>个人资料</a></li>
+        <li class="active">
+            <div class="clear">
+                <a href="{% url 'user:message' %}?page=1" style="margin-left: 30px">我的消息</a>
+            </div>
+        </li>
+        <li><a href="{% url 'user:collect' %}?page=1"><span class="icon"></span>我的收藏</a></li>
+    </ul>
+{% endblock userinfo_list %}
+
+{% block message %}
+    <div class="c_2" style="display: block;">
+        <p class="tit">我的消息 <span><a href="javascript:;" class="del" onclick="delete_all_message()">[全部清空]</a></span></p>
+        <p class="border_b"></p>
+        <ul class="list li">
+            {% for message in pages %}
+            <li>
+                <p class="tit">{{ message.message_type_title }}
+                    <time>{{ message.create_time }}</time>
+                    {{ message.title }}<span><a href="javascript:;" onclick="delete_message({{ message.id }})">删除</a></span></p>
+                <p class="con">消息内容：{{ message.content }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        <script>
+            function delete_message(message_id) {
+                var result = confirm('是否删除该条消息？');
+                if(result) {
+                    set_csrf_header()
+                    $.ajax({
+                        url: '{% url 'user:message' %}?page={{ page }}',
+                        type: 'delete',
+                        data: {
+                            message_id: message_id
+                        },
+                        success: function (response) {
+                            if(response.success) {
+                                alert('消息删除成功！');
+                                setTimeout(() => {
+                                    location.reload()
+                                }, 2000);
+                            }
+                            else {
+                                alert(response.errmsg);
+                            }
+                        }
+                    })
+                }
+            }
+            function delete_all_message() {
+                var result = confirm('是否清空全部消息？');
+                if(result) {
+                    set_csrf_header()
+                    $.ajax({
+                        url: '{% url 'user:message' %}?page={{ page }}',
+                        type: 'delete',
+                        success: function (response) {
+                            if(response.success) {
+                                alert('消息清空成功');
+                                setTimeout(() => {
+                                    location.reload()
+                                }, 2000);
+                            }
+                            else {
+                                alert(response.errmsg);
+                            }
+                        }
+                    })
+                }
+            }
+        </script>
+        <ul class="page clear">
+            <li><a href="{% url 'user:message' %}?page=1">首页</a></li>
+            {% if pages.has_previous %}
+                <li><a href="{% url 'user:message' %}?page={{ pages.previous_page_number }}">上一页</a></li>
+            {% endif %}
+            {% for page in pages.my_page_range %}
+                <li><a href="{% url 'user:message' %}?page={{ page }}" {% if page == pages.number %} class="thispage" {% endif %}>{{ page }}</a></li>
+            {% endfor %}
+            {% if pages.has_next %}
+                <li><a href="{% url 'user:message' %}?page={{ pages.next_page_number }}">下一页</a></li>
+            {% endif %}
+        </ul>
+    </div><!--我的消息-->
+{% endblock message %}
+
+{% block collect %}{% endblock collect %}

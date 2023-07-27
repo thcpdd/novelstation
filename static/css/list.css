@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+a[class^=icon_down]{ height:40px;}
+a[class^=icon_down] span{ display:block; float:left;
+	  text-align:center;border: 1px solid #ededed; background:url(../img/icon.png) no-repeat;margin:10px auto;width:20px; height:20px;}
+a.icon_down{ width:28px;}
+a.icon_down span{ background-position:6px 5px; }
+a.icon_down2{width:56px;}
+a.icon_down2 span{ background-position:4px -27px;margin-left:18px;}
+
+.box{width:1100px; margin:50px auto;}
+.box .list{width:750px; float:left; position:relative;}
+.box .list .con{ margin:20px 0 50px;}
+.box .list .con li{ height:40px; line-height:40px; margin-bottom:10px;}
+.box .list .con li a{ margin-left: 5px;margin-right: 5px;}
+.box .list .con li a,.box .list .con li sapn,.box .list .con li b{ display:block; float:left;}
+.box .list .con li .icon_span{float:left; margin-top:5px; margin-right:5px;}
+.box .list .con li a.single{ width:285px; margin-right:20px;}
+.mar_left{margin-left:40px;}
+.box .list .con li:hover{background:#F7F7F9;}
+.box .list .tit{background:#f5f6fa; height:50px; line-height:50px; width:100%;border: 1px solid #EBEFEF /*#dcdddd*/;
+ padding-left:30px; padding-right:20px; font-size:15px; letter-spacing:1px;}
+.box .list .tit b:nth-of-type(2){ float:right;}
+.box .list .tit b:nth-of-type(3){ float:right; margin-right:20px;}
+
+.page{ position:absolute; bottom:40px;}

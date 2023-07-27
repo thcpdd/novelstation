@@ -1,0 +1,224 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{{ novel.title }}{% endblock title %}
+
+{% block static_file %}
+    <link href="{% static 'css/arcticle2.css' %} " rel="stylesheet" type="text/css">
+    <script src="{% static 'js/list.js' %}"></script>
+    <script src="{% static 'js/user.js' %}"></script>
+{% endblock static_file %}
+
+{% block head_file %}
+    <style>
+        .description {
+            width:580px;
+            display: inline-block;
+            float: right
+        }
+        .page li a {
+            display: block;
+            border: 1px solid #e7ecf0;
+            padding: 3px 6px;
+            height: 100%;
+        }
+        {#.left {#}
+        {#    float: left;#}
+        {#}#}
+    </style>
+{% endblock head_file %}
+
+{% block body %}
+    <div class="box clear">
+        <div class="list">
+            <div class="pos">
+                当前位置：
+                <a href="{% url 'novel:index' %}">首页</a> >
+                <a href="{% url 'novel:list' active 1 %}">{{ novel.novels_type.name }}</a> >
+                {{ novel.title }}
+            </div>
+            <h3>{{ novel.title }}</h3>
+            <ul class="tab clear">
+                <li class="active"><a href="#">简介</a></li>
+                <li><a href="#">章节目录<b>({{ novel.chapters }})</b></a></li>
+                <li><a href="#">评论<b>({{ novel.comments }})</b></a></li>
+            </ul>
+            <div class="tab_1">
+                <div class="info clear">
+                    <img src="{{ novel.image.url }}" class="image" style="width:153px; height: 211px" alt="image">
+                    <div class="description">{{ novel.description }}</div>
+                </div>
+                <ul class="clear info_1">
+                    <p>基本信息</p>
+                    <li><span>作 &nbsp; &nbsp; &nbsp; 者：</span>{{ novel.author_info.name }}</li>
+                    <li><span>总 &nbsp;销 &nbsp;量：</span>{{ novel.sales }}</li>
+                    <li><span>收 &nbsp;藏 &nbsp;数：</span>{{ novel.collections }}</li>
+                    <li><span>出版时间：</span>{{ novel.create_time }}</li>
+                    <li><span>分 &nbsp; &nbsp; &nbsp; 类：</span>{{ novel.novels_type.name }}</li>
+                    <li><span>评 &nbsp; &nbsp; &nbsp; 价：</span>{{ novel.comments }}人评价 <samp>|</samp> {{ novel.watcher }}人阅读</li>
+                </ul>
+            </div><!--简介介绍-->
+
+            <div class="tab_1">
+                <div class="tit">章节目录<b>({{ novel.chapters }})</b></div>
+                <div class="mu">
+                    <ul class="clear">
+                        {% for chapter in chapters_pages.object_list %}
+                            <li id="chapter">
+                                <a href="{% url 'novel:read' chapter.novels_info_id forloop.counter|add:key %}">{{ chapter.title }}</a>
+                                <div class="play_xq">
+                                    <time>更新时间：{{ chapter.create_time }}</time>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <ul class="page clear">
+                    <li><a href="{% url 'novel:detail' novel.id %}?chapter_page=1&comment_page=1">首页</a></li>
+                    {% if chapters_pages.has_previous %}
+                        <li><a href="{% url 'novel:detail' novel.id %}?chapter_page={{ chapters_pages.previous_page_number }}&comment_page={{ comment_page }}">上一页</a></li>
+                    {% endif %}
+                    {% for page in chapters_pages.my_page_range %}
+                        <li><a href="{% url 'novel:detail' novel.id %}?chapter_page={{ page }}&comment_page={{ comment_page }}" {% if page == chapters_pages.number %} class="thispage" {% endif %}>{{ page }}</a></li>
+                    {% endfor %}
+                    {% if chapters_pages.has_next %}
+                        <li><a href="{% url 'novel:detail' novel.id %}?chapter_page={{ chapters_pages.next_page_number }}&comment_page={{ comment_page }}">下一页</a></li>
+                    {% endif %}
+                </ul><!--章节分页-->
+
+                <div id="up" class="clear">
+                    <a href="{% url 'novel:read' novel.id  1 %}">
+                        <samp>立即阅读</samp>
+                        <span class="icon ease"></span>
+                    </a> |
+                    <a href="javascript:;" id="collect"><samp>加入收藏</samp></a>
+                    {% csrf_token %}
+                </div>
+                <script>
+                    $('#collect').on('click', function () {
+                        set_csrf_header();
+                        $.ajax({
+                            url: '{% url 'novel:detail' novel.id %}',
+                            type: 'post',
+                            success: function (response) {
+                                if(response.success) {
+                                    alert('加入收藏成功')
+                                }
+                                else {
+                                    alert(response.errmsg);
+                                }
+                            }
+                        })
+                    })
+                </script>
+            </div><!--章节目录-->
+
+            <div class="tab_1 ">
+                <div class="tit">评论<b>({{ novel.comments }})</b></div>
+            </div>
+            <div class="comment">
+                {% if request.user.is_authenticated %}
+                <div class="com_con clear zong">
+                    <div class="portrait left mar_top">
+                        <img src="{{ request.user.image.url }}" alt="image"><br/>
+                        <span>{{ request.user.username }}</span>
+                    </div>
+                    <div class="right kdit_w">
+                        {% csrf_token %}
+                        <textarea name="content" class="content">发表评论</textarea>
+                        <p></p>
+                        <input type="submit" value="提交" class="ease" id="comment">
+                    </div>
+                    <script>
+                        $('#comment').on('click', function () {
+                            set_csrf_header()
+                            $.ajax({
+                                url: '{% url 'comment:comment' %}',
+                                type: 'post',
+                                data: {
+                                    novel_id: {{ novel.id }},
+                                    content: $('.content').val()
+                                },
+                                success: function (response) {
+                                    if(response.success) {
+                                        alert('评论成功');
+                                        setTimeout(() => {
+                                            location.reload()
+                                        }, 2000);
+                                    }
+                                    else {
+                                        alert(response.errmsg)
+                                    }
+                                }
+                            })
+                        })
+                    </script>
+                </div><!--当前用户评论-->
+                {% endif %}
+
+                <ul class="com_con clear">
+                    {% for comment in comments_pages.object_list %}
+                    <div class="com_bor">
+                        <li class="go">
+                            <div class="com_1 clear">
+                                <div class="portrait left">
+                                    <img src="{{ comment.user_info.image.url }}" alt="image"><br/>
+                                    <span>{{ comment.user_info.username }}</span>
+                                </div>
+                                <div class="word kdit_w">
+                                    <p class="time">在 {{ comment.create_time.time }} 评论：</p>
+                                    <p>{{ comment.content }}</p>
+                                    <p class="right">
+                                        <time>{{ comment.create_time.date }}</time>
+                                    </p>
+                                </div>
+                            </div><!--评论内容-->
+                        </li>  <!--第一条评论内容-->
+                    </div> <!--      -第一条评论  -->
+                    {% endfor %}
+                </ul>
+                <ul class="page clear">
+                    <li><a href="{% url 'novel:detail' novel.id %}?chapter_page=1&comment_page=1">首页</a></li>
+                    {% if comments_pages.has_previous %}
+                        <li><a href="{% url 'novel:detail' novel.id %}?chapter_page={{ chapter_page }}&comment_page={{ comments_pages.previous_page_number }}">上一页</a></li>
+                    {% endif %}
+                    {% for page in comments_pages.my_page_range %}
+                        <li><a href="{% url 'novel:detail' novel.id %}?chapter_page={{ chapter_page }}&comment_page={{ page }}" {% if page == comments_pages.number %} class="thispage" {% endif %}>{{ page }}</a></li>
+                    {% endfor %}
+                    {% if comments_pages.has_next %}
+                        <li><a href="{% url 'novel:detail' novel.id %}?chapter_page={{ chapter_page }}&comment_page={{ comments_pages.next_page_number }}">下一页</a></li>
+                    {% endif %}
+                </ul>
+
+            </div><!--评论结束-->
+
+        </div><!--右边结束-->
+        <div class="list2">
+            <div class="one">
+                <p>新书上架</p>
+                <div class="notice">
+                    <ul>
+                        {% for new_novel in new_novels %}
+                            <li><a href="{% url 'novel:detail' new_novel.id %}?chapter_page=1&comment_page=1">{{ new_novel.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div><!--新书上架结束-->
+
+            <div class="two">
+                <p><a href="javascript:;" class="active">本周最热排行</a><a href="javascript:;">本月最热排行</a></p>
+                <ul class="active">
+                    {% for hot_novel in hot_novels %}
+                        <li><a href="{% url 'novel:detail' hot_novel.id %}?chapter_page=1&comment_page=1">{{ hot_novel.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul>
+                    {% for hot_novel in hot_novels %}
+                        <li><a href="{% url 'novel:detail' hot_novel.id %}?chapter_page=1&comment_page=1">{{ hot_novel.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div><!--tab切换-->
+        </div><!--左边结束-->
+    </div><!--中间box 结束-->
+{% endblock body %}

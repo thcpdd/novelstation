@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+
+.regContent {
+clear: both;
+display: block;
+width: 1000px;
+height: auto;
+margin-left:20%;
+padding-top: 25px;
+margin-bottom:50px;
+}
+h3{font-size: 26px;
+letter-spacing: 1px;
+font-weight: normal;}
+.regContent div.account{width:650px; overflow:hidden;}
+.regContent a.account_img img{float:left;margin-top:20px; margin-right:8px;}
+.regContent div label{margin-right:5px; font-family:"微软雅黑";}
+
+.regContent .account label,.regContent .pass label,.regContent .pass2 label,.regContent .email label,.regContent .ver label,.regContent .describe label{ width:65px; text-align:right;}
+.regContent div label{width:65px; text-align:right;}
+.regContent div label.label{width:80px}
+.regContent div{ height:50px; line-height:50px;font-size:16px; margin-left:100px; }
+.regContent div p,.regContent div input,.regContent div label{ float:left;}
+
+
+.regContent div input[type='text'],.regContent div input[type='password']{margin:10px 5px 0px 15px; height:30px; line-height:30px; padding-left:3px; width:200px; font-size:14px;}
+.regContent .account input,.regContent .pass input,.regContent .pass2 input,.regContent .email input,.regContent .ver input{margin:10px 5px 0px; height:25px; line-height:25px; padding-left:3px; width:200px; font-size:14px;}
+
+
+.regContent div i{font-style:normal; color:#F00; margin:0px 5px;line-height:50px;vertical-align: sub;display: inline-block;}
+.regContent div p{font-size:14px;color:#666; display:none; height:50px}
+/*.regContent div p:nth-of-type(1){}
+.regContent div p:nth-of-type(2){color:#F00; } 
+.regContent div p:nth-of-type(2) image{vertical-align:middle; margin-right:5px;}*/
+.regContent div p img{vertical-align:middle; margin-right:5px;}
+.regContent div.wed label{ margin-right:8px;}
+.regContent div.wed label:not(:first-child){font-size:14px;width:auto;}
+.regContent div.wed input{ margin-top:20px;}
+.regContent .jingao p{display:block;}
+.regContent .jingao font{cursor:pointer;}
+.regContent .jingao i{ vertical-align:top;}
+.regContent .jingao input{margin-top:20px; margin-right:7px;}
+.regContent div.submit,.regContent div.pa_ac{width:430px;}
+.regContent div.submit span{font-size:14px;font-family:"微软雅黑";color:#666; margin:0px 5px 0px 50px;}
+.regContent div.submit input{border:none; outline:none;width:135px; height:40px; margin-top:5px; padding:0px; cursor:pointer;}
+.regContent div.submit input:hover{background-position:0px 0px;}
+.regContent div.submit a{color:#09f;}
+.regContent div.pa_ac a{color:#09f; margin:0px 20px;}/*头部*/
+.wed label{width:auto;}
+
+.regContent .problem select{ padding:6px 0px 7px; margin-left:14px; float:left;margin-top: 10px;}
+.regContent  .gray{font-size:14px;color:#666; margin-left:83px; clear:left; height:30px; line-height:30px; margin-bottom:5px;}
+.regContent .problem p,.regContent .problem2 p,.regContent .problem3 p{display:block;}
+/*.regContent .problem3 .ask{width:300px; height:50px; line-height:50px;font-size:16px;font-family:"微软雅黑";color:#069}*/
+.regContent .problem3 .answer3{ margin-left:86px; clear:left}
+.regContent .problem3 .gray{ float:left;}
+
+
+/*投诉和建议*/
+.regContent div.type select{width:205px; height:30px; line-height:30px; font-size:14px; margin-left:14px;}
+.regContent div.describe{ height:160px;}
+.regContent div.describe textarea{width:300px; height:140px; font-size:14px; padding:5px; line-height:20px; float:left;margin-left:15px;}
+.regContent div.describe img{margin-left:5px;}
+.regContent div.describe p{/*clear:left;*/ margin-top:110px;}
+.regContent div.ver img.ver_img{ height:30px;width:80px; margin-top:10px; float:left;margin-right:5px}
+.regContent div.submit2{ width:500px; margin:10px 0px 0px 195px;}
+.regContent div.submit2 input{width:100px; height:32px;}

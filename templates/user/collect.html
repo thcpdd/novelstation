@@ -1,0 +1,97 @@
+{% extends 'user/userinfo.html' %}
+
+{% block head_file %}{% endblock head_file %}
+
+{% block userinfo %}{% endblock userinfo %}
+{% block message %}{% endblock message %}
+
+{% block userinfo_list %}
+    <ul class="list_1">
+        <li><a href="{% url 'user:user' 'info' %}"><span class="icon"></span>个人资料</a></li>
+        <li>
+            <div class="clear">
+                <a href="{% url 'user:message' %}?page=1" style="margin-left: 30px">我的消息</a>
+            </div>
+        </li>
+        <li class="active"><a href="{% url 'user:collect' %}?page=1"><span class="icon"></span>我的收藏</a></li>
+    </ul>
+{% endblock userinfo_list %}
+
+{% block collect %}
+    <div class="c_3" style="display: block;">
+        <p class="tit">我的收藏<span><a href="javascript:;" class="del" onclick="delete_all_novels()">[取消全部收藏]</a></span></p>
+        <p class="border_b"></p>
+        <ul class="list li">
+            {% for novel in pages.object_list %}
+            <li>
+                <span class="icon_span pos_book"></span>
+                <a href="{% url 'novel:detail' novel.id %}?chapter_page=1&comment_page=1">{{ novel.title }}</a>
+                <span class="right">
+                    <time>{{ novel.author_info.name }}</time>
+                    <a href="javascript:;" class="delete_collect" onclick="delete_novel({{ novel.id }})">取消收藏</a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% csrf_token %}
+        <ul class="page clear">
+            <li><a href="{% url 'user:collect' %}?page=1">首页</a></li>
+            {% if pages.has_previous %}
+                <li><a href="{% url 'user:collect' %}?page={{ pages.previous_page_number }}">上一页</a></li>
+            {% endif %}
+            {% for page in pages.my_page_range %}
+                <li><a href="{% url 'user:collect' %}?page={{ page }}" {% if page == pages.number %} class="thispage" {% endif %}>{{ page }}</a></li>
+            {% endfor %}
+            {% if pages.has_next %}
+                <li><a href="{% url 'user:collect' %}?page={{ pages.next_page_number }}">下一页</a></li>
+            {% endif %}
+        </ul>
+    </div><!--我的收藏-->
+    <script>
+        function delete_novel(novel_id) {
+            var result = confirm('是否取消收藏该小说？');
+            if(result) {
+                set_csrf_header()
+                $.ajax({
+                    url: '{% url 'user:collect' %}?page={{ page }}',
+                    type: 'delete',
+                    data: {
+                        novel_id: novel_id
+                    },
+                    success: function (response) {
+                        if(response.success) {
+                            alert('取消收藏成功！');
+                            setTimeout(() => {
+                                location.reload()
+                            }, 2000);
+                        }
+                        else {
+                            alert(response.errmsg);
+                        }
+                    }
+                })
+            }
+        }
+        function delete_all_novels() {
+            var result = confirm('是否全部取消收藏？');
+            if(result) {
+                set_csrf_header()
+                $.ajax({
+                    url: '{% url "user:collect" %}?page={{ page }}',
+                    type: 'delete',
+                    success: function (response) {
+                        if(response.success) {
+                            alert('全部取消收藏成功！');
+                            setTimeout(() => {
+                                location.reload()
+                            }, 2000);
+                        }
+                        else {
+                            alert(response.errmsg);
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+{% endblock collect %}

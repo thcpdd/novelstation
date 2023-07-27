@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{{ chapter.title }}{% endblock title %}
+
+{% block static_file %}
+    <link href="{% static 'css/arcticle3.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/arcticle3.js' %}"></script>
+{% endblock static_file %}
+
+{% block head_file %}
+    <style>
+        #line {
+            width: 782px;
+        }
+
+    </style>
+{% endblock head_file %}
+
+{% block body %}
+    <div class="box">
+        <div class="pos">
+            当前位置：
+            <a href="{% url 'novel:index' %}">首页</a> >
+            <a href="{% url 'novel:list' chapter.novels_info.novels_type.logo 1 %}">{{ chapter.novels_info.novels_type.name }}</a> >
+            <a href="{% url 'novel:detail' chapter.novels_info_id %}?chapter_page=1&comment_page=1">{{ chapter.novels_info.title }}</a> > 正文
+            <a href="{% url 'novel:detail' chapter.novels_info_id %}?chapter_page=1&comment_page=1" class="right">回到目录>></a>
+        </div>
+        <div class="con">
+            <div class="tit">{{ chapter.title }}</div><!--章节名称-->
+            <p><img src="{% url 'media' 'image/line.png' %}" alt="line" id="line"></p>
+            <div class="arcticle">
+                {% for content in contents %}
+                    <p>{{ content }}</p>
+                {% endfor %}
+            </div> <!--正文-->
+            <div class="flip">
+                {% if pages.has_previous %}
+                    <a href="{% url 'novel:read' chapter.novels_info_id pages.previous_page_number %}">上一页</a> |
+                {% endif %}
+                {% if pages.has_next %}
+                    <a href="{% url 'novel:read' chapter.novels_info_id pages.next_page_number %}">下一页</a>
+                {% endif %}
+            </div>
+        </div>
+    </div><!--内容区结束-->
+
+{% endblock body %}

@@ -1,0 +1,90 @@
+﻿{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}小说驿站-首页{% endblock title %}
+
+{% block static_file %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock static_file %}
+
+{% block head_file %}
+    <style>
+        .rotation {
+            margin-left: 290px;
+            width: 1107px;
+        }
+        #recommend_image {
+            width: 153px;
+            height: 221px
+        }
+    </style>
+{% endblock head_file %}
+
+{% block body %}
+    <div class="banner clear">
+        <ul>
+            {% for rotation in rotations %}
+                <li><img class="rotation" src="{{ rotation.image.url }}" alt="{{ rotation.name }}"></li>
+            {% endfor %}
+        </ul>
+        <p class="num">
+            <a href="javascript:;" class="active"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </p>
+        <p class="left_right">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </p>
+    </div><!--banner结束-->
+
+    <div class="box">
+        <div class="box_1 box_con">
+            <h3>特别推荐</h3>
+            <ul class="clear">
+                {% for recommend in recommends %}
+                    <li><a href="{% url 'novel:detail' recommend.id %}?chapter_page=1&comment_page=1"><img src="{{ recommend.image.url }}" alt="{{ recommend.title }}" id="recommend_image"></a>
+                        <p style="margin-top: 7px">
+                            <a href="{% url 'novel:detail' recommend.id %}?chapter_page=1&comment_page=1">《{{ recommend.title }}》</a>
+                        </p>
+                        <p style="margin-top: 7px">
+                            <a href="#">{{ recommend.author_info.name }} [著]</a>
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="box_2 box_con">
+            <h3>最新上架</h3>
+            <ul class="clear">
+                {% for new_novel in new_novels %}
+                    <li>
+                        <a href="javascript:;"><span class="icon_span"></span></a>
+                        <a href="#"><b>[ {{ new_novel.novels_type.name }} ]</b></a>
+                        <a href="{% url 'novel:detail' new_novel.id %}?chapter_page=1&comment_page=1"><strong>{{ new_novel.title }}</strong></a>
+                        <time>{{ new_novel.create_time }}</time>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="box_1 box_con">
+            <h3>热销书籍</h3>
+            <ul class="clear">
+                {% for hot_sale in hot_sales %}
+                    <li><a href="{% url 'novel:detail' hot_sale.id %}?chapter_page=1&comment_page=1"><img src="{{ hot_sale.image.url }}" alt="{{ hot_sale.title }}" id="recommend_image"></a>
+                        <p style="margin-top: 7px">
+                            <a href="{% url 'novel:detail' hot_sale.id %}?chapter_page=1&comment_page=1">《{{ hot_sale.title }}》</a>
+                        </p>
+                        <p style="margin-top: 7px">
+                            <a href="#">{{ hot_sale.author_info.name }} [著]</a>
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div><!--内容-->
+{% endblock body %}

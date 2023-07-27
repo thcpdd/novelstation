@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* CSS Document */
+.box {
+    width: 800px;
+    margin: 30px auto 0px;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: normal;
+    border-bottom: 1px solid #D4D4D4;
+    padding-bottom: 10px;
+}
+
+h3 .right {
+    font-size: 14px;
+}
+
+.menu_3 {
+    width: 350px;
+    margin: 30px auto;
+}
+
+.box a {
+    color: /*#16A1E7*/ #3586BC;
+    margin-left: 4px;
+}
+
+.none {
+    margin-left: 77px;
+}
+
+input[type=checkbox] {
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.ver {
+    width: 80px;
+    height: 33px;
+    vertical-align: middle;
+    border: 1px solid #dedede;
+    margin: -1px 5px 0px 15px;
+}
+
+input.style_none {
+    background: none !important;
+    width: 100px !important;
+    padding-left: 5px !important;
+}
+
+.up_fm {
+    margin-left: 8px;
+}
+
+.up_img {
+    margin-left: 80px !important;
+}
+

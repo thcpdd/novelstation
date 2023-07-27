@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* CSS Document */
+.box{width:1100px; margin:50px auto;}
+.box .list{width:750px; float:left;}
+.pos a{color:#16A1E7;}
+.box .list .con h3{ font-size:20px; letter-spacing:1px; margin:30px 0px 10px;} 
+.box .list .con p{ text-indent:2em; line-height:1.9em; margin:10px 0px;}
+.box .list .content{ margin:10px 0px 20px; }
+
+.mar_top{margin-top:20px;}
+.introduce{ height:30px; line-height:30px; margin-left:20%;}
+.introduce .sc_c{display:block; float:left; margin-left:20px; }
+.introduce .sc_c span{background-position:-40px -20px;width:15px; height:12px; display:block; float:left; margin-top:11px;}
+
+
+.fx {font-size:16px; padding-top:10px; margin-bottom:40px;}
+.fx .left a{color:#16A1E7;}
+.fx .left a:hover{color:#F00;transition-property:color;-webkit-transition-property:color; -moz-transition-property:color; 
+transition-timing-function:linear;-moz-transition-timing-function:linear;-webkit-transition-timing-function:linear;
+transition-duration: 0.2s;-webkit-transition-duration: 0.2s;-moz-transition-duration: 0.2s;}
+
+.comment .tit{border:1px solid #EBEFEF;border-bottom: 1px solid #dcdcdc; background-color:#f7f7f7; height:50px; line-height:50px; padding:0px 10px;}
+.comment .tit h4{ float:left; font-size:18px; margin-right:5px;}
+.comment .page{ display:none;}
+

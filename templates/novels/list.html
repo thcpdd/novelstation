@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}小说列表页{% endblock title %}
+
+{% block static_file %}
+    <link href="{% static 'css/index_article.css' %}" rel="stylesheet" type="text/css">
+{% endblock static_file %}
+
+{% block body %}
+    <div class="box clear">
+        <ul class="list left">
+            {% if novels_type == 'all' %}
+            <p>全部分类</p>
+            <li class="active"><a href="#">全部分类</a></li>
+            {% else %}
+            <p>{{ novels_type.name }}类</p>
+            <li class="active"><a href="#">{{ novels_type.name }}</a></li>
+            {% endif %}
+        </ul><!--左边列表-->
+
+        <div class="con left">
+            {% if novels_type == 'all' %}
+                <div class="position"><a href="{% url 'novel:index' %}">首页</a> > <a href="javascript:;">全部分类</a> > <a
+                    href="javascript:;" class="acative">全部分类</a></div>
+            {% else %}
+                <div class="position"><a href="{% url 'novel:index' %}">首页</a> > <a href="javascript:;">{{ novels_type.name }}类</a> > <a
+                    href="javascript:;" class="acative">{{ novels_type.name }}</a></div>
+            {% endif %}
+
+            <ul class="con_list clear">
+                {% for novel in pages.object_list %}
+                    <li class="ease">
+                        <a href="{% url 'novel:detail' novel.id %}?chapter_page=1&comment_page=1"><img src="{{ novel.image.url }}"></a>
+                        <p class="s_n"><a href="{% url 'novel:detail' novel.id %}?chapter_page=1&comment_page=1">{{ novel.title }}</a></p>
+                    </li>
+                {% endfor %}
+            </ul>
+            <!--列表内容-->
+
+            <ul class="page clear">
+                <li><a href="{% url 'novel:list' sort 1 %}">首页</a></li>
+                {% if pages.has_previous %}
+                    <li><a href="{% url 'novel:list' sort pages.previous_page_number %}">上一页</a></li>
+                {% endif %}
+                {% for page in pages.my_page_range %}
+                    {% if page == pages.number %}
+                        <li><a href="{% url 'novel:list' sort page %}" class="thispage">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'novel:list' sort page %}">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if pages.has_next %}
+                    <li><a href="{% url 'novel:list' sort pages.next_page_number %}">下一页</a></li>
+                {% endif %}
+            </ul><!--分页-->
+
+        </div><!--右边内容页-->
+
+    </div><!--中间内容区-->
+
+{% endblock body %}

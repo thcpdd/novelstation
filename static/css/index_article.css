@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+.box{ width:1100px; margin: 30px auto;}
+.box .list{ width:200px; line-height:35px; margin-left: auto}
+.box .list p{ background-color:#16A1E7;color:#fff; height:40px; line-height:40px;  text-align:center;}
+.box .list li{border: 1px solid #ededed;border-top: 0;background:#f8f8f8 /*#f5f4f2*/;height:35px;}
+.box .list li a{ display:block; padding-left:20px;}
+.box .list li:hover{ background-color:#46B6EF/*#16A1E7*/; border-color:#46B6EF;}
+.box .list li:hover a{color:#fff;}
+.box .list .active a{ font-weight:bold;}
+
+.box .con{ margin-left:50px; width:850px;}
+.box .con li{float:left; }
+.box .con .position{ height:30px;}
+.box .con .position .acative{color:#16A1E7;}
+.box .con .con_list{ text-align:center;}
+.box .con .con_list li{ padding:15px 2% 5px;width:190px;border: 1px solid #fff; margin-bottom:10px; margin-top:5px; position:relative; height: 260px}
+.box .con .con_list li:hover{background:#f5f6fa;border-color:#E7E7E7/* #f2f2eb*/;}
+.box .con .con_list li a{ display:block; width:100%; height:180px;}
+.box .con .con_list li a img{ width:153px; height:221px;}
+.box .con .con_list li .s_n a{ height:30px; line-height:30px; margin-top: 37px}
+.box .con .con_list li .sm{ position:absolute; bottom:34px; height:50px; background:rgba(0,0,0,0.3);width:134px; display:none;}
+.box .con .con_list li .sm p{ margin:0px  auto; text-align:center; }
+.box .con .con_list li .sm a{color:#fff; width:auto; height:auto; margin:0px 6px;font-size:12px; display:inline-block;}
+.box .con .con_list li .sm span{width:15px; height:13px; display:block; float:left;}
+.box .con .con_list li .sm .down{ background-position:-40px -40px; margin-top:3px;}
+.box .con .con_list li .sm .sc{ background-position:-40px -0px;width:15px; height:13px; margin-right:3px; margin-left:15px; margin-top:4px;}
+.box .con .con_list li .sm a:hover .down{ background-position:-40px -60px;}
+.box .con .con_list li .sm a:hover .sc{ background-position:-40px -20px;}

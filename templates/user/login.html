@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}小说驿站-登录{% endblock title %}
+
+{% block static_file %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/login.js' %}"></script>
+{% endblock static_file %}
+
+{% block head_file %}
+    <style>
+        .submit{ margin-left:73px;}
+        .menu_3 input[type=password] {
+            border: none;
+            background: none;
+            border: 1px solid #C7C5C5;
+            border-radius: 3px;
+            width: 250px;
+            padding: 0px 3px 0px;
+            height: 32px;
+            line-height: 32px;
+            margin-left: 5px;
+        }
+    </style>
+{% endblock head_file %}
+
+{% block search_box %}{% endblock search_box %}
+{% block navigation %}{% endblock navigation %}
+
+{% block body %}
+    <div class="box">
+    <h3>小说驿站-用户登录<span class="right">还没有账号？<a href="{% url 'user:register' %}">点击注册</a></span></h3>
+           <div class="menu_3">
+               <form id="user_name" method="post" action="{% url 'user:login' %}">
+                   {% csrf_token %}
+                   <p><span>用户名：</span> <input type="text" name="name" value="{{ username }}" class="text_1" placeholder="用户名/邮箱" required>
+                       <br/><span  class="none"></span>
+                   </p>
+                   <p><span>密 &nbsp; &nbsp;码：</span> <input type="password" name="pwd"  class="text_3" required>
+                       <br/><span  class="none"></span>
+                   </p>
+                   <span class="errmsg" style="color: red">{{ errmsg }}</span>
+                   <p style=" margin-left:70px;"><input  type="checkbox" value="1" name="cookie">记住用户名 <a href="{% url 'user:forgot' %}">忘记密码？</a></p>
+                   <p><input type="submit"  value="登录"  class="submit"></p>
+               </form>
+           </div>
+    </div>
+{% endblock body %}

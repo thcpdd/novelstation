@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+body{background:/*#F5F3F4 #FDFDFB #F1F1F1*/ #f5f6fa;}
+.box{width:900px; margin:50px auto;}
+.pos a{color:#16A1E7;}
+.box .con{ background: #FFF; position:relative;  margin-top:30px; box-shadow: 0px 0px 5px /*#dedede*/ rgba(0, 0, 0, 0.2);/*border: 1px solid #dedede;*/ padding:30px 50px}
+.box .con .tit{ height:40px; font-size:20px; font-weight:bold; text-align:center; line-height:40px; letter-spacing:1px;}
+.box .con .arcticle p{ text-indent:2em; line-height:1.9em; margin:10px 0px;}    
+.flip{bottom:40px; right:40px; margin-left: 320px; margin-top: 20px}
+.flip a{color:#999;}
+.flip a:hover{color:#333;}
+.prenext{ margin:20px 0px; font-size:16px; height:25px; line-height:25px;}
+.prenext a{ color:#09C;}
+.prenext a:hover{color:#09f;}
+.prenext span{display:block; width:15px; height:23px; margin:0px 2px;}
+.prenext .left span{/* background-position:-40px -157px; */float:left;background-position:0px -120px; transform:rotate(180deg);
+ -moz-transform:rotate(180deg); -ms-transform:rotate(180deg); -webkit-transform:rotate(180deg);}
+.prenext .right{ text-align:right;}
+.prenext .right span{ float:right;/* background-position:-68px -157px;*/background-position:0px -118px;}
+.this a{ color:#666;}
+
+/*------------内容区---------------------*/
+
+.fixed{ width:46px; padding:8px 0px;background:#fff;  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); top:30%; right:10%; position:fixed;}
+.fixed li:hover{ background-color:#F1F1F1}
+.fixed .icon{ margin:2px 8px; padding:3px; height:28px;width:30px; cursor:pointer;}
+.fixed .icon:nth-of-type(1){ background-position:-76px -75px;}
+.fixed .icon:nth-of-type(2){background-position: -75px -36px;}
+.fixed .icon:nth-of-type(3){ background-position:-30px -157px; transform:rotate(90deg); -moz-transform:rotate(90deg); -ms-transform:rotate(90deg); -webkit-transform:rotate(90deg);}
+.fixed .icon:nth-of-type(4){ background-position:-58px -157px; transform:rotate(90deg); -moz-transform:rotate(90deg); -ms-transform:rotate(90deg); -webkit-transform:rotate(90deg);}
+.fixed .icon:nth-of-type(5){background-position: -74px -115px; display:none; opacity:0; filter:alpha(opacity=0);}
+/*---------------固定右边小菜单---------------------*/
+
+.Catalog{ width:0px; height:450px; position:absolute;  z-index:3;background:#F4F4F7; right:120px; top:0px; padding:20px 0px 30px;
+           box-shadow: 1px 0 2px 0 rgba(51,51,51,.07) inset; font-size:16px; border:1px solid #dedede; border-left:none; display:none;overflow:hidden;}
+
+.Catalog .cata_2{padding:0px 30px;height:398px; position:absolute; right:0px; top:30px;}
+.Catalog .scroll{ position:absolute; right:8px; top:0px;width:8px; height:0px; border-radius:5px; background:#ccc; z-index:4; cursor:pointer;}
+.Catalog .scroll:hover{ background:#09C;}/*----------------目录滚动条------------------*/
+
+.Catalog .cata_1{ padding:0px 30px; width:100%; height:398px; overflow:hidden;}
+.Catalog .cata_con{ position:relative; top:0px;}
+.Catalog li{ line-height:44px; border-bottom:1px dashed #CCC; height:40px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.Catalog li span{ width:10px; height:10px; border-radius:50%; background:#B1D3E4; display:block; float:left; margin-right:10px; margin-top:4%;}
+.Catalog li .tit{ font-weight:bold;color:#666;font-size: 17px;}
+.Catalog li  a{color:#333;}/*------------------目录内容--------------------*/
+
+.I_ment{ width:300px; height:176px; position:absolute; z-index:7; border:1px  solid #dedede;background:#F8F8FB; top:7px; right:65px;
+        padding:5px 5px 20px 15px;    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); display:none;}
+.fixed .I_ment span.icon{ background-position:-54px 5px; width:16px; height:15px; display:block; margin:0px; float:right;}
+
+.I_ment .r{ border: 8px solid transparent;  border-left: 8px solid #F4F4F7; position:absolute; right:-16px; top:50px; z-index:5;}
+.I_ment .r2{ border: 9px solid transparent;  border-left: 9px solid #CECFD2; position:absolute; right:-18px; top:49px; z-index:4;}
+
+
+.I_ment form p{ margin-top:5px;}
+.I_ment form p samp{ font-family:"微软雅黑"; font-size:14px;}
+.I_ment textarea{ border-radius:3px;height:80px; width:245px;resize:none;border:none; border:1px  solid #dedede; padding:10px; margin-top:4px;color:#666;
+font-size:12px;}
+
+.I_ment input{ border:none; background:none; float:right; outline:none; width: 60px; height: 26px; border: 1px solid #cacaca; border-radius:5px; margin:3px 10px 0px 0px;}
+.I_ment input.sub{background: linear-gradient(#fff,#e3ecf3); background:-moz-linear-gradient(#fff,#e3ecf3); }
+.I_ment input.dis{/* background: linear-gradient(#fff,#bef5ff 10%,#6cb7df);border-color: #bef5ff;*/
+  background:-moz-linear-gradient(#fff,#BEEAFF 10%,#6cb7df);     background:-webkit-linear-gradient(#fff,#BEEAFF 10%,#6cb7df); border-color: #BEE1FF;}
+.I_ment .red{ font-size:12px; margin-top:2px;}
+/*--------------------------------------------------*/

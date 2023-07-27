@@ -1,0 +1,226 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}小说驿站-个人主页{% endblock title %}
+{% block static_file %}
+    <link href="{% static 'css/user.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/user.js' %}"></script>
+{% endblock static_file %}
+
+{% block head_file %}
+    <style>
+        .menu_3 input[type=password] {
+            border: none;
+            background: none;
+            border: 1px solid #C7C5C5;
+            border-radius: 3px;
+            width: 250px;
+            padding: 0px 3px 0px;
+            height: 32px;
+            line-height: 32px;
+            margin-left: 5px;
+        }
+    </style>
+{% endblock head_file %}
+
+{% block body %}
+    <div class="box">
+        <div class="box_1 clear">
+            <div class="z_left">
+                <div class="list_1">
+                    <div class="portrait">
+                        <p class="por_modify">
+                            <img src="{{ request.user.image.url }}" alt="{{ request.user.image.url }}">
+                        </p>
+                        <p>{{ request.user.username }}</p>
+                        <p class="border_b"></p>
+                        <p><span>积分</span> <b>{{ request.user.integral }}</b></p>
+                    </div>
+                </div><!--头像部分-->
+                {% block userinfo_list %}
+                    <ul class="list_1">
+                        <li class="active"><a href="{% url 'user:user' 'info' %}"><span class="icon"></span>个人资料</a></li>
+                        <li>
+                            <div class="clear">
+                                <a href="{% url 'user:message' %}?page=1" style="margin-left: 30px">我的消息</a>
+                            </div>
+                        </li>
+                        <li><a href="{% url 'user:collect' %}?page=1"><span class="icon"></span>我的收藏</a></li>
+                    </ul>
+                {% endblock userinfo_list %}
+            </div><!--左边-->
+            <div class="center_r">
+                {% block userinfo %}
+                    <div class="c_1" style="display:block;">
+                        <p class="tit">个人资料修改</p>
+                        <p class="border_b"></p>
+                        <p class="ul">
+                            <a href="{% url 'user:user' 'info' %}" {% if active == 'info' %} class="active" {% endif %}>个人资料</a>
+                            |
+                            <a href="{% url 'user:user' 'image' %}" {% if active == 'image' %} class="active" {% endif %}>修改头像</a>
+                            |
+                            <a href="{% url 'user:user' 'email' %}" {% if active == 'email' %} class="active" {% endif %}>修改邮箱</a>
+                            |
+                            <a href="{% url 'user:user' 'password' %}" {% if active == 'password' %} class="active" {% endif %}>修改密码</a>
+                        </p>
+                        <ul class="tab menu_1" {% if active == 'info' %} style="display:block;" {% endif %}>
+                            <li class="h_portrait">
+                                <p class="por_modify">
+                                    <img src="{{ request.user.image.url }}" alt="{{ request.user.image.url }}" style="width: 130px; height: 130px">
+                                </p>
+                            </li>
+                            <li><span>用户名</span>：{{ request.user.username }}</li>
+                            <li><span>邮 &nbsp; 箱</span>：{{ request.user.email }}</li>
+                        </ul>
+                        <div class="tab menu_2" {% if active == 'image' %} style="display:block;" {% endif %}>
+                            <img src="{{ request.user.image.url }}" alt="{{ request.user.image.url }}" style="width: 130px; height: 130px">
+                            <form id="up_pro">
+                                {% csrf_token %}
+                                <input type="file" name="protrait" class="text" hidden="hidden" id="my_image">
+                                <p id="modi_image"><input type="button" class="submit" name="up_pro" value="更换头像" id="change_btn" style="display: inline-block"></p>
+                                <p id="right" style="display: none"><input type="button" class="submit" value="确认" id="confirm_btn"></p>
+                            </form>
+                            <script>
+                                $(document).ready(function() {
+                                    // 点击"更换头像"按钮时触发文件输入标签
+                                    $('#change_btn').on('click', function() {
+                                        $('#my_image').trigger('click');
+                                    });
+                                    // 当用户选择了头像文件后
+                                    $('#my_image').on('change', function() {
+                                        // 隐藏"更换头像"按钮，显示"确认"按钮
+                                        $('#modi_image').hide();
+                                        $('#right').show();
+                                        alert('头像上传成功，点击确认以完成头像的修改')
+                                    });
+
+                                    // 当用户点击"确认"按钮时
+                                    $('#confirm_btn').on('click', function() {
+                                        // 获取用户上传的图片文件
+                                        var file = $('#my_image')[0].files[0];
+
+                                        // 创建FormData对象，用于发送文件和其他数据到后端
+                                        var formData = new FormData();
+                                        formData.append('image', file);
+
+                                        set_csrf_header()
+
+                                        // 发送Ajax请求到后端
+                                        $.ajax({
+                                            url: '{% url 'user:user' 'image' %}?class=image',  // 后端处理上传图片的URL
+                                            type: 'POST',
+                                            data: formData,
+                                            processData: false,
+                                            contentType: false,
+                                            success: function(response) {
+                                                if(response.success) {
+                                                    alert('头像更换成功！');
+                                                    setTimeout(() => {
+                                                        location.reload()
+                                                    }, 2000);
+                                                }
+                                                else {
+                                                    alert(response.errmsg);
+                                                }
+                                            },
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <div class="tab menu_3" {% if active == 'email' %} style="display:block;" {% endif %}>
+                            <form id="user_email">
+                                {% csrf_token %}
+                                <p><span>邮 &nbsp; 箱：</span><input id="email" type="text" name="email" value="" class="text_2"
+                                                                     autocomplete="off"> <em>*</em><i>请输入正确的邮箱</i>
+                                </p>
+                                <p id="modify_email"><input type="button" value="提交" class="submit"></p>
+                            </form>
+                            <script>
+                                $(document).ready(function() {
+                                    $('#modify_email').on('click', function () {
+                                        var email = $('#email').val();
+                                        set_csrf_header()
+                                        $.ajax({
+                                            url: '{% url 'user:user' 'email' %}?class=email',
+                                            data: {
+                                                email: email
+                                            },
+                                            type: 'post',
+                                            success: function (response) {
+                                                if(response.success) {
+                                                    alert('邮箱修改成功！');
+                                                    setTimeout(() => {
+                                                        location.reload()
+                                                    }, 2000);
+                                                }
+                                                else {
+                                                    alert(response.errmsg);
+                                                }
+                                            }
+                                        })
+                                    })
+                                })
+                            </script>
+                        </div>
+                        <div class="tab menu_3" {% if active == 'password' %} style="display:block;" {% endif %}>
+                            <form id="user_pass">
+                                {% csrf_token %}
+                                <p><span>当前密码：</span>
+                                    <input type="password" name="old_pwd" id="old_pwd" value="" class="text_3" autocomplete="off" required>
+                                </p>
+                                <p><span>&nbsp;新 密 码：</span>
+                                    <input type="password" name="new_pwd" id="new_pwd" value="" class="text_3" autocomplete="off" required>
+                                </p>
+                                <p><span>确认密码：</span>
+                                    <input type="password" name="new_pwd2" id="new_pwd2" value="" class="text_3" autocomplete="off" required>
+                                </p>
+                                <p id="modify_password"><input type="button" value="提交" class="submit" style="margin-left:77px"></p>
+                            </form>
+                            <script>
+                                $(document).ready(function() {
+                                    $('#modify_password').on('click', function () {
+                                        var old_pwd = $('#old_pwd').val();
+                                        var new_pwd = $('#new_pwd').val();
+                                        var new_pwd2 = $('#new_pwd2').val();
+                                        if(!old_pwd || !new_pwd2 || !new_pwd) {
+                                            alert('数据不完整');
+                                            return;
+                                        }
+                                        if(new_pwd2 != new_pwd) {
+                                            alert('新密码两次输入不一致')
+                                            return;
+                                        }
+                                        set_csrf_header();
+                                        $.ajax({
+                                            url: '{% url 'user:user' 'password' %}?class=password',
+                                            type: 'post',
+                                            data: {
+                                                old_pwd: old_pwd,
+                                                new_pwd: new_pwd,
+                                            },
+                                            success: function (response) {
+                                                if(response.success) {
+                                                    alert('密码修改成功')
+                                                    setTimeout(() => {
+                                                        location.reload()
+                                                    }, 2000);
+                                                }
+                                                else {
+                                                    alert(response.errmsg)
+                                                }
+                                            }
+                                        })
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </div><!--个人资料修改-->
+                {% endblock userinfo %}
+
+                {% block message %}{% endblock message %}
+                {% block collect %}{% endblock collect %}
+            </div><!--遮罩层-->
+        </div>
+    </div>
+{% endblock body %}

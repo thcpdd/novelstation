@@ -1,0 +1,118 @@
+@charset "utf-8";
+/* CSS Document */
+.box{width:1100px; margin:50px auto;}
+.box .list{width:750px; float:left;}
+.box .list  h3{ font-size:22px; letter-spacing:1px; margin:20px 0px 10px; font-weight:normal;} 
+.box .list .info span{ background-color: #d9d9d7; width:1px;}
+.box .list .tab{border:1px solid #a6a6a4; font-size:16px; height:40px;  border-radius:3px 3px 0px 0px; background:#fff;width:750px; z-index:10;}
+.box .list .tab li{float:left;padding:7px 25px 0px;border-right:1px solid #dcdcdc; height:39px; margin-bottom:-1px;background: linear-gradient(#fff,#E7E9EA);
+background: -moz-linear-gradient(#fff,#E7E9EA); position:relative; border-bottom:1px solid #a6a6a4;}
+.box .list .tab .active{background: linear-gradient(#F3F3F3,#fff);
+background: -moz-linear-gradient(#F3F3F3,#fff);border-bottom:#fff; z-index:2;}
+.box .list .tab .active a{color:#16A1E7;}
+.box .list .tab li b{ color:#666; font-size:14px; margin-left:3px;}
+.box .list .tab_1{ padding:20px 0px;}
+
+.info{ line-height:1.5; text-indent:2em;}
+.fx{ margin:15px 0px 10px;}
+.dsf{ height:25px;float:right;}
+.dsf a{display:block; height:100%; float:left; width:70px;line-height:27px;  margin-right:20px;}
+.dsf b{display:block; height:100%; float:left; line-height:27px;  margin-right:10px; font-weight:normal;}
+.dsf a span{ display:block; float:left; width:25px; height:25px; margin-right:3px;}
+.down{ background-position:1px -78px; }
+.sc{ background-position:-0px -157px;}/*---------------下载收藏分享---------------*/
+.dsf em{ font-style:normal; font-size:13px;}
+
+.box .list .tab_1 ul{ margin-top:20px;}
+.box .list .tab_1 ul p{border-left:3px solid #16A1E7; padding-left:5px;}
+.box .list .tab_1 ul li{height:35px; }
+.box .list .tab_1 ul li samp{color:#999;}
+
+.box .list .tab_1 .info_1 li span{ width:74px; display:block; float:left;color:#666;}
+.box .list .tab_1 .info_1 p{height:20px; line-height:20px;}
+.box .list .tab_1 .info_1 li{ width:50%; float:left; border-bottom:1px dotted #E6E6E1;line-height:40px;}
+/*-------------------------------------书籍信息-----------------------------------------------------*/
+
+.play{ margin-bottom:20px;}
+.play time{color:#999; font-size:12px; float:right;}
+.play .play_t{ margin-bottom:10px;}
+.play .play_t a{color:#3E9AD8/*#3586BC*/;}
+.start{border: 1px solid #dcdddd; height:55px; width:100%; background:-webkit-linear-gradient(#FAFAFA,#F3F3F3);
+ background:-moz-linear-gradient(#FAFAFA,#F3F3F3);background:-ms-linear-gradient(#FAFAFA,#F3F3F3);}
+.start .left{width:50px; height:55px;}
+.start .left a{width:30px; height:31px;margin-top:10px; margin-left:10px;}
+.start .left .play_1{ background-position:0px -223px; }
+.start .left .play_1:hover{ background-position:-40px -223px;}
+.start .left .play_2{ background-position:0px -255px; }
+.start .left .play_2:hover{ background-position:-40px -255px;}
+.start .sound{ width:calc(100% - 50px); padding-top:10px;float: left; cursor:pointer; position:relative; z-index:3;}
+.start .sound img{width:100%;border-bottom:1px solid #dedede;}
+.start .sound .sound_stream{ position:absolute;bottom:0px; top:0px;width:37px; display:none; opacity:0; filter:alpha(opacity=0);}
+.start .sound .sound_stream .time{ background:#09F; color:#fff; padding:0px 1px; position:absolute;}
+.start .sound .sound_stream .s_2{  position:absolute; top:19px;}
+.start .sound .sound_stream .dian{width:6px; height:2px;background:#09F; border-radius:0px 0px 2px 2px; margin-left:0;}
+.start .sound .sound_stream .line{ width:1px; height:14px;background:#09F; margin-left:2px;}
+/*----------------播放阅读------------------*/
+
+.dsf1{ float:right; height:20px; margin-top:3px;}
+.dsf1 a{ margin-right:20px;display:block; float:left}
+.dsf1 a span{width:15px; height:15px; margin-top:5px;}
+.dsf1 b{ font-weight:normal;}
+.dsf1 .down{ background-position:-40px -39px; }
+.dsf1 a:hover .down{ background-position:-40px -60px; }
+.dsf1 .sc{ background-position:-40px -0px;}
+.dsf1 a:hover .sc{ background-position:-40px -20px;}
+/*---------------下载收藏分享---------------*/
+
+.box .list .tab_1 .mu li,.box .list .tab_1 .mu p{ border-bottom:1px solid #E6E6E1;line-height:40px;height:40px;}
+.box .list .tab_1 .mu li{width:100%; padding-left:10px;content:""; clear:both; }
+.box .list .tab_1 .mu li:hover {background-color: #FAFAFA;}
+.box .list .tab_1 .mu li a{color:#3E9AD8;}
+.box .list .tab_1 .mu .active{ -webkit-animation:bgcolor 7s ease-in-out 2s infinite alternate; -moz-animation:bgcolor 7s ease-in-out 2s infinite alternate;
+-ms-animation:bgcolor 7s ease-in-out 2s infinite alternate;animation:bgcolor 7s ease-in-out 2s infinite alternate;}
+@keyframes bgcolor{
+	form{ background-color:FFF;}
+	50%{ background-color:#FFE6E6;}
+	to{ background-color:FFF;}
+}
+.box .list .tab_1 .mu li span[id^=b]{width:20px; height:20px; margin-top:10px; margin-right:5px; cursor:pointer;}
+.play_3{ background-position:-80px -222px;}
+.play_3:hover{background-position:-80px -242px; }
+.play_4{ background-position:-80px -262px;}
+.play_4:hover{background-position:-80px -282px; }
+
+/*-----------------听阅读目录---------------------*/
+
+.play_xq{ float:right; padding-right:10px; position:relative;}
+.play_xq time{ font-size:12px;color:#666; margin-top:-2px; margin-left:20px;}
+.play_xq span{ width:15px; height:15px; margin: 14px 5px 0px;}
+.play_xq a{ display:block; float:left; height:39px;}
+.play_xq .sc{ background-position:-82px -308px;}
+.play_xq .sc_c:hover .sc{ background-position:-82px -328px;}
+.play_xq .xq2{ background-position:-82px -348px;}
+.play_xq .fx_c:hover .xq2{ background-position:-82px -368px;}
+.play_xq .xq3{ background-position:-82px -388px;}
+.play_xq .pl_c:hover .xq3{ background-position:-82px -408px;}
+.play_xq .xq4{background-position:-58px -308px; transform:rotate(90deg); -moz-transform:rotate(90deg); -ms-transform:rotate(90deg); -webkit-transform:rotate(90deg);}
+.play_xq  .xz_c:hover .xq4{background-position:-58px -328px;}
+/*----------列表小图标-----------------------------*/
+.fx_con{ border:1px solid #B9B9B7; position:absolute; z-index:3; top:-47px; left:-22px; opacity:0; display:none;}
+.fx_con .colse{ height:20px; line-height:20px;width:100%; border:none; background:#F1F1F1;width:122px;}
+.fx_con .colse a{ float:right; background-position:-55px 4px;width:10px; height:10px; padding:10px;}
+.fx_con  .bdsharebuttonbox{ padding-left:7px; background:#fff;}
+.fx_con .bor_1{ position:absolute;  border: 5px solid transparent;  border-top: 7px solid #fff; z-index:5;left:52px; bottom:-12px;}
+.fx_con .bor_2{  position:absolute;  border:6px solid transparent;  border-top: 8px solid #B9B9B7; z-index:4;left:51px; bottom:-14px;}
+/*------------------分享框-----------------------*/
+
+
+
+
+
+.box .list .tab_1 #up{border-bottom:1px dotted #E6E6E1; height:40px; line-height:40px; width:100%; text-align:right}
+.box .list .tab_1 #up samp{font-family:"微软雅黑";}
+.box .list .tab_1 #up span{float:right; width:12px; height:8px; background-position:-60px -20px; margin-top:17px; margin-left:3px;}
+.box .list .tab_1 #up a:hover span{ transform:rotate(180deg); transform-origin:center center;}
+.box .list .tab_1 .tit{ font-size:16px;border-bottom: 1px solid #a6a6a4; height:28px;}
+.box .list .tab_1 .tit b{ color:#666; font-size:14px; margin-left:3px;}
+.tab_list{ display:none;}/*----------------标题 和展开目录  --------*/
+

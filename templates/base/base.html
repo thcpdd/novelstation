@@ -1,0 +1,99 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}小说驿站{% endblock title %}</title>
+    <link href="{% static 'css/css.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/js.js' %}"></script>
+    {% block static_file %}{% endblock static_file %}
+    {% block head_file %}{% endblock head_file %}
+</head>
+<body>
+{% block head %}
+    <header class="clear">
+        <a href="{% url 'novel:index' %}"><img src="{% url 'media' 'image/logo.png' %}" alt="logo"></a>
+        <div class="logo">
+            <h1>小说驿站</h1>
+            <div class="clear"></div>
+        </div>
+        {% block search_box %}
+            <div class="search left">
+                <form action="" method="get">
+                    {% csrf_token %}
+                    <input type="text" value="" placeholder="请输入书名或作者名称">
+                    <input type="submit" value="搜索">
+                </form>
+                <div class="left">
+                    <span>热门推荐：</span>
+                    {% for hot_novel in hot_novels %}
+                        <a href="{% url 'novel:detail' hot_novel.id %}?chapter_page=1&comment_page=1" style="margin-left: 3px">{{ hot_novel.title }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endblock search_box %}
+        <div class="reg">
+            {% if not request.user.is_authenticated %}
+                <div class="delu">
+                    <a href="{% url 'user:login' %}">登录</a>
+                    <span>|</span>
+                    <a href="{% url 'user:register' %}">注册</a>
+                </div>
+            {% else %}
+                <div class="delu2 clear" style="margin-top: 7px">
+                    <a href="{% url 'user:user' 'info' %}" class="news">欢迎您：{{ request.user.username }}</a>
+                    <span class="split">|</span>
+                    <a href="{% url 'user:user' 'info' %}" class="news">个人中心</a>
+                    <span class="split">|</span>
+                    <a href="{% url 'user:logout' %}" class="news">退出登录</a>
+                    <span class="split">|</span>
+                    <a href="{% url 'user:message' %}?page=1" class="news">消息</a>
+                </div>
+            {% endif %}
+        </div>
+    </header>
+{% endblock head %}
+
+{% block navigation %}
+    <nav class="clear">
+        <ul class="nav_1 clear">
+            {% if not active %}
+                <div class="active"></div>
+                <li><a href="{% url 'novel:index' %}" style="color: white">首页</a></li>
+            {% else %}
+                <li><a href="{% url 'novel:index' %}" style="color: black">首页</a></li>
+            {% endif %}
+            {% if active == 'all' %}
+                <li>
+                    <div class="active" style="width: 110px; height: 50px">
+                        <a href="{% url 'novel:list' 'all' 1 %}" style="color: white">全部分类</a>
+                    </div>
+                </li>
+            {% else %}
+                    <li><a href="{% url 'novel:list' 'all' 1 %}">全部分类</a></li>
+            {% endif %}
+            {% for novels_type in novels_types %}
+                {% if active == novels_type.logo %}
+                    <li>
+                        <div class="active" style="width: 110px; height: 50px">
+                            <a href="{% url 'novel:list' novels_type.logo 1 %}" style="color: white">{{ novels_type.name }}</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'novel:list' novels_type.logo 1 %}">{{ novels_type.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+{% endblock navigation %}
+<!--导航栏结束-->
+
+{% block body %}{% endblock body %}
+<footer class="clear">
+    <p>小说驿站是学习分享平台，如对本站有意见和建议请<a href="javascript:;">留言</a></p>
+    <p>本站所有信息仅用于学习交流，非商业用途 </p>
+    <p>Powered by 小说驿站</p>
+</footer><!--底部结束-->
+</body>
+</html>
