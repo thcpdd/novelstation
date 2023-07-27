@@ -139,9 +139,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = '1834763300@qq.com'
-EMAIL_HOST_PASSWORD = 'yfffobochkfmihcd'
-EMAIL_FROM = '小说驿站-邮箱官方<1834763300@qq.com>'
+EMAIL_HOST_USER = '你的邮箱'
+EMAIL_HOST_PASSWORD = '你的邮箱授权码'
+EMAIL_FROM = '小说驿站-邮箱官方<你的邮箱>'
 
 # 配置未登录路径
 LOGIN_URL = '/user/login'
