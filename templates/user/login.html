@@ -34,15 +34,21 @@
            <div class="menu_3">
                <form id="user_name" method="post" action="{% url 'user:login' %}">
                    {% csrf_token %}
-                   <p><span>用户名：</span> <input type="text" name="name" value="{{ username }}" class="text_1" placeholder="用户名/邮箱" required>
-                       <br/><span  class="none"></span>
+                   <p><span>用户名：</span>
+                       <!--<input type="text" name="name" value="{{ username }}" class="text_1" placeholder="用户名/邮箱" required>-->
+                       <input type="text" name="name" value="rainbow" class="text_1" placeholder="用户名/邮箱" required>
+                       <br/><span class="none"></span>
                    </p>
-                   <p><span>密 &nbsp; &nbsp;码：</span> <input type="password" name="pwd"  class="text_3" required>
-                       <br/><span  class="none"></span>
+                   <p><span>密 &nbsp; &nbsp;码：</span>
+                       <!--<input type="password" name="pwd" class="text_3" required>-->
+                       <input type="password" name="pwd" class="text_3" value="rainbow" required>
+                       <br/><span class="none"></span>
                    </p>
                    <span class="errmsg" style="color: red">{{ errmsg }}</span>
-                   <p style=" margin-left:70px;"><input  type="checkbox" value="1" name="cookie">记住用户名 <a href="{% url 'user:forgot' %}">忘记密码？</a></p>
-                   <p><input type="submit"  value="登录"  class="submit"></p>
+                   <p style=" margin-left:70px;"><input type="checkbox" value="1" name="cookie">记住用户名
+                       <a href="{% url 'user:forgot' %}">忘记密码？</a>
+                   </p>
+                   <p><input type="submit" value="登录"  class="submit"></p>
                </form>
            </div>
     </div>
