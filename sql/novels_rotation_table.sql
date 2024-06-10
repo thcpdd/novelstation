@@ -1,4 +1,0 @@
-INSERT INTO novel_station.novels_rotation_table (id, create_time, update_time, is_delete, name, image) VALUES (1, '2023-07-25 06:09:44.452017', '2023-07-25 06:09:44.453517', 0, '轮播图1', 'rotations/081173a27bbb743a48dda6ada433d2fd.jpg');
-INSERT INTO novel_station.novels_rotation_table (id, create_time, update_time, is_delete, name, image) VALUES (2, '2023-07-25 06:10:11.494866', '2023-07-25 06:10:11.494866', 0, '轮播图2', 'rotations/aac6738d3797eb1499e3f4a9176b9549.jpg');
-INSERT INTO novel_station.novels_rotation_table (id, create_time, update_time, is_delete, name, image) VALUES (3, '2023-07-25 06:10:34.861546', '2023-07-25 06:10:34.861546', 0, '轮播图3', 'rotations/318bca82e59535f3c251ed00c341e756.jpg');
-INSERT INTO novel_station.novels_rotation_table (id, create_time, update_time, is_delete, name, image) VALUES (4, '2023-07-25 06:10:56.864917', '2023-07-25 06:10:56.864917', 0, '轮播图4', 'rotations/684176eda55bc858208f4fb55ad13e8d.jpg');

@@ -48,7 +48,7 @@ class RegisterView(View):
             # 发送邮箱
             subject = '小说驿站-注册信息'
             from_email = settings.EMAIL_FROM
-            html_msg = f'<h1>{username},欢迎您注册小说驿站会员</h1>请点击下面链接激活您的账号</br><a href="http://127.0.0.1:8000/' \
+            html_msg = f'<h1>{username},欢迎您注册小说驿站会员</h1>请点击下面链接激活您的账号</br><a href="http://127.0.0.1:9000/' \
                        f'user/active/{token}">点此激活账号</a>'
             send_mail(subject, message='', from_email=from_email, recipient_list=[email], html_message=html_msg)
 

@@ -1,2 +1,0 @@
-INSERT INTO novel_station.message_table (id, create_time, update_time, is_delete, title, content, message_type, user_info_id) VALUES (6, '2023-07-26 13:55:51.824205', '2023-07-26 13:55:51.824205', 0, '注册成功信息', '恭喜！您已经成功开通了账号。现在，开始您的阅读之旅吧！', '0', 4);
-INSERT INTO novel_station.message_table (id, create_time, update_time, is_delete, title, content, message_type, user_info_id) VALUES (7, '2023-07-26 13:56:29.055406', '2023-07-26 13:56:29.055406', 0, 'river评论了你的作品，快看看吧', '不错', '1', 2);

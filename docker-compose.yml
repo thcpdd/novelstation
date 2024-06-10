@@ -1,0 +1,25 @@
+version: "3.8"
+
+services: 
+  db:
+    image: mysql:5.7
+    restart: always
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    environment:
+      MYSQL_DATABASE: novel_station
+      MYSQL_ROOT_PASSWORD: novel_station_password
+
+    volumes:
+      - ./data.sql:/sql_scripts/NovelStation/data.sql
+
+  web:
+    build: .
+    command: bash -c "python3 ./wait_for_mysql.py db 3306 root novel_station_password novel_station && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:9000"
+    restart: always
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+  
+  cache:
+    image: redis:latest
